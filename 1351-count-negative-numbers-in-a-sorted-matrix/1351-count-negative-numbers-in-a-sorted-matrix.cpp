@@ -1,11 +1,22 @@
 class Solution {
+    int solve(vector<int>& v){
+        int low = 0;
+        int high = v.size() - 1;
+        while (low <= high)
+        {
+            int mid = low + (high - low) / 2;
+            if (v[mid] >= 0)
+                low = mid + 1;
+            else
+                high = mid - 1;
+        }
+        return v.size() - low;
+    }
 public:
     int countNegatives(vector<vector<int>>& v) {
         int count = 0;
         for(int i = 0;i<v.size();i++){
-            for(int j = 0;j<v[i].size();j++){
-                if(v[i][j]<0) count++;
-            }
+            count+=solve(v[i]);
         }
         return count;
     }
