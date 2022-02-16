@@ -11,22 +11,10 @@
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
-        int size = 0;
-        ListNode * curr = head;
-        while(curr!=NULL){
-            curr = curr->next;
-            size++;
-        }
-        // cout<<size;
-        if(size<2) return head;
-        curr = head;
-        while(curr!=NULL){
-            if(curr->next==NULL) break;
-            int temp = curr->next->val;
-            curr->next->val = curr->val;
-            curr->val = temp;
-            curr = curr->next->next;
-        }
-        return head;
+        if(!head || !head->next) return head;
+        ListNode * temp = head->next;
+        head->next = swapPairs(head->next->next);
+        temp->next = head;
+        return temp;
     }
 };
