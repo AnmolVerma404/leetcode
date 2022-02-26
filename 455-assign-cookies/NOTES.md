@@ -1,4 +1,4 @@
-Gready
+Greedy
 ```
 class Solution {
 public:
