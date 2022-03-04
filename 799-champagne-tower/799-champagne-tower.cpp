@@ -5,7 +5,7 @@ public:
         dp[0][0] = poured;
         for(int i = 0;i<100;i++){
             for(int j = 0;j<=i;j++){
-                if(dp[i][j]>=1){
+                if(dp[i][j]>1){
                     /*
                         5 -> poured -> after balancing 1
                     1        1
