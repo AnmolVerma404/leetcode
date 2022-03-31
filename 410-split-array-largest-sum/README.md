@@ -5,25 +5,25 @@
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
 
-<pre><strong>Input:</strong> nums = [7,2,5,10,8], m = 2
+<pre style="position: relative;"><strong>Input:</strong> nums = [7,2,5,10,8], m = 2
 <strong>Output:</strong> 18
 <strong>Explanation:</strong>
 There are four ways to split nums into two subarrays.
 The best way is to split it into [7,2,5] and [10,8],
 where the largest sum among the two subarrays is only 18.
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p><strong>Example 2:</strong></p>
 
-<pre><strong>Input:</strong> nums = [1,2,3,4,5], m = 2
+<pre style="position: relative;"><strong>Input:</strong> nums = [1,2,3,4,5], m = 2
 <strong>Output:</strong> 9
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p><strong>Example 3:</strong></p>
 
-<pre><strong>Input:</strong> nums = [1,4,4], m = 3
+<pre style="position: relative;"><strong>Input:</strong> nums = [1,4,4], m = 3
 <strong>Output:</strong> 4
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
