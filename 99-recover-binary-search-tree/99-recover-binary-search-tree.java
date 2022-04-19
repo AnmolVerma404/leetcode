@@ -2,7 +2,7 @@ class Solution {
     TreeNode prev = new TreeNode(Integer.MIN_VALUE);
     TreeNode t1 = null;
     TreeNode t2 = null;
-    private void inOrder(TreeNode root){
+    public void inOrder(TreeNode root){
         if(root == null )return;
         inOrder(root.left);
         if(t1==null && prev.val>root.val){
