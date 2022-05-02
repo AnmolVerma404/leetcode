@@ -5,21 +5,21 @@
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2020/09/09/trim1.jpg" style="width: 450px; height: 126px;">
-<pre><strong>Input:</strong> root = [1,0,2], low = 1, high = 2
+<pre style="position: relative;"><strong>Input:</strong> root = [1,0,2], low = 1, high = 2
 <strong>Output:</strong> [1,null,2]
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p><strong>Example 2:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2020/09/09/trim2.jpg" style="width: 450px; height: 277px;">
-<pre><strong>Input:</strong> root = [3,0,4,null,2,null,null,1], low = 1, high = 3
+<pre style="position: relative;"><strong>Input:</strong> root = [3,0,4,null,2,null,null,1], low = 1, high = 3
 <strong>Output:</strong> [3,2,null,1]
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
 
 <ul>
-	<li>The number of nodes in the tree in the range <code>[1, 10<sup>4</sup>]</code>.</li>
+	<li>The number of nodes in the tree is in the range <code>[1, 10<sup>4</sup>]</code>.</li>
 	<li><code>0 &lt;= Node.val &lt;= 10<sup>4</sup></code></li>
 	<li>The value of each node in the tree is <strong>unique</strong>.</li>
 	<li><code>root</code> is guaranteed to be a valid binary search tree.</li>
