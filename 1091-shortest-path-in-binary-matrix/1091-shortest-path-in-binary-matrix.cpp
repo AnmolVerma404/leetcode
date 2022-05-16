@@ -1,6 +1,8 @@
 class Solution {
 public:
     int shortestPathBinaryMatrix(vector<vector<int>>& v) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);        
         int res = 1;
         int r = v.size();
         int c = v[0].size();
