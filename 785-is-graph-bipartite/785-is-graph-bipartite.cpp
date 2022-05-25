@@ -1,47 +1,29 @@
 class Solution {
 public:
-    bool colorCycle(vector<vector<int>> &g, vector<int> &color, int curr)
-{
-    queue<int> q;
-    q.push(curr);
-    color[curr] = 1;
-    while (!q.empty())
-    {
-        int top = q.front();
-        q.pop();
-        for (auto i : g[top])
-        {
-            if (color[i] == -1)
-            {
-                color[i] = 1 - color[top];
-                q.push(i);
-            }
-            else if (color[i] == color[top])
-            {
+    bool bipartite(vector<vector<int>>&g,vector<int>&color,int i){
+        if(color[i]==-1) color[i] = 1;
+        for(auto j : g[i]){
+            if(color[j]==-1){
+                color[j] = 1 - color[i];
+                if(!bipartite(g,color,j)){
+                  return false;
+                 }
+            }else if(color[j] == color[i]){
                 return false;
             }
         }
+        return true;
     }
-    return true;
-}
-bool bfs(vector<vector<int>> &g, int n)
-{
-    vector<int> color(n, -1);
-    for (int i = 0; i < n; i++)
-    {
-        if (color[i] == -1)
-        {
-            if (!colorCycle(g, color, i))
-            {
-                return false;
-            }
-        }
-    }
-    return true;
-}
-   
     bool isBipartite(vector<vector<int>>& g) {
         int n = g.size();
-        return bfs(g,n);
+        vector<int>color(n,-1);
+        for(int i = 0;i<n;i++){
+            if(color[i] == -1){
+                if(!bipartite(g,color,i)){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 };
