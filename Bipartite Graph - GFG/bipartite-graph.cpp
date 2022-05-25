@@ -5,35 +5,38 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
 public:
-	bool isBipartite(int n, vector<int>g[]){
-    vector<int> color(n, -1); // visited color:- 0->red, 1->blue
-    for (int i = 0; i < n; i++)
+    bool bipartiteDFS(vector<int> g[], vector<int> &color, int i)
     {
-        if (color[i] == -1)
+        if(color[i]==-1) color[i] = 1;//Set the current node color to 1
+        for (auto j : g[i])
         {
-            queue<int> q;
-            q.push(i);
-            color[i] = 1;
-            while (!q.empty())
+            if (color[j] == -1)//If the next node is not visited
             {
-                int top = q.front();
-                q.pop();
-                for (auto j : g[top])
+                color[j] = 1 - color[i];//Set the next node color to opposite of parent node i.e. 0 if 1 or 1 if 0
+                if(!bipartiteDFS(g,color,j)){
+                    return false;
+                }
+            }
+            else if (color[j] == color[i])//If next node is already visited check if the next node and the current node color are the same. If they are return false. Which implies the graph is not bipartite
+            {
+                return false;
+            }
+        }
+        return true;//Finally return true
+    }
+	bool isBipartite(int n, vector<int>g[]){
+	    vector<int> color(n, -1);
+        for (int i = 0; i < n; i++)
+        {
+            if (color[i] == -1)
+            {
+                if (!bipartiteDFS(g, color, i))//Check if DFS is resulting true if not if's not a bipartite graph
                 {
-                    if (color[j] == -1)
-                    {
-                        q.push(j);
-                        color[j] = 1 - color[top];
-                    }
-                    else if (color[j] == color[top])
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
         }
-    }
-    return true;
+        return true;
 	}
 
 };
