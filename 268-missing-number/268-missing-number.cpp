@@ -1,9 +1,11 @@
 class Solution {
 public:
-    int missingNumber(vector<int>& v) {
-        sort(v.begin(),v.end());
-        int i = 0;
-        for(i = 0;i<v.size();i++) if(i!=v[i]) return i;
-        return i;
+    int missingNumber(vector<int>& nums) {
+        int x = 0,y = 0;
+        for(int i = 0;i<nums.size();i++){
+            x ^= nums[i];
+            y ^= (i+1);
+        }
+        return x^y;
     }
 };
