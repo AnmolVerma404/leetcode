@@ -5,42 +5,43 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
   public:
-  bool dfsCycle(vector<int> g[], vector<bool> &visited, vector<bool> &dfsVisited, int i)
+  bool bfs(vector<int> g[], int n)
     {
-        visited[i] = true;
-        dfsVisited[i] = true;
-        for (auto j : g[i])
-        {
-            if (visited[j] == false)
-            {
-                if (dfsCycle(g, visited, dfsVisited, j))
-                {
-                    return true;
-                }
-            }
-            else if (dfsVisited[j] == true)
-            {
-                return true;
-            }
-        }
-        dfsVisited[i] = false;
-        return false;
-    }
-    
-    bool isCyclic(int n, vector<int> g[]) {
-        vector<bool> visited(n, false);
-        vector<bool> dfsVisited(n, false);
+        queue<int> q;
+        vector<int> inOrder(n, 0);
         for (int i = 0; i < n; i++)
         {
-            if (visited[i] == false)
+            for (auto j : g[i])
             {
-                if (dfsCycle(g, visited, dfsVisited, i))
+                inOrder[j]++;
+            }
+        }
+        for (int i = 0; i < n; i++)
+        {
+            if (inOrder[i] == 0)
+                q.push(i);
+        }
+        int count = 0;
+        while (!q.empty())
+        {
+            int top = q.front();
+            q.pop();
+            count++;
+            for (auto i : g[top])
+            {
+                inOrder[i]--;
+                if (inOrder[i] == 0)
                 {
-                    return true;
+                    q.push(i);
                 }
             }
         }
-        return false;
+        if(count == n) return false;
+        return true;
+    }
+
+    bool isCyclic(int n, vector<int> g[]) {
+        return bfs(g,n);
     }
 };
 
