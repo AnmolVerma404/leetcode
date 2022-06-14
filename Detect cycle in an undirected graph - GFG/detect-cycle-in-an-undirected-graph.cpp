@@ -5,25 +5,26 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
   public:
-  bool dfsCycle(vector<int>g[],vector<bool>&visited,int i,int p){
-      visited[i] = true;
-      for(auto j : g[i]){
-          if(!visited[j]){
-              if(dfsCycle(g,visited,j,i)){
-                  return true;
-              }
-          }else if(j!=p){
-              return true;
-          }
-      }
-      return false;
-  }
+    // Function to detect cycle in an undirected graph.
     bool isCycle(int n, vector<int> g[]) {
         vector<bool>visited(n,false);
         for(int i = 0;i<n;i++){
             if(!visited[i]){
-                if(dfsCycle(g,visited,i,-1)){
-                    return true;
+                queue<pair<int,int>>q;
+                q.push({i,-1});
+                while(!q.empty()){
+                    int top = q.front().first;
+                    int par = q.front().second;
+                    q.pop();
+                    visited[top] = true;
+                    for(int j : g[top]){
+                        if(!visited[j]){
+                            visited[j] = true;
+                            q.push({j,top});
+                        }else if(par!=j){
+                            return true;
+                        }
+                    }
                 }
             }
         }
