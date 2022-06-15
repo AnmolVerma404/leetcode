@@ -10,9 +10,9 @@ class Solution
     //from the source vertex S.
     vector <int> dijkstra(int n, vector<vector<int>> g[], int s)
     {
-        vector<int>distance(n,INT_MAX);
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
-        distance[s] = 0;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        vector<int>d(n,INT_MAX);
+        d[s] = 0;
         pq.push({0,s});
         while(!pq.empty()){
             int dist = pq.top().first;
@@ -21,13 +21,13 @@ class Solution
             for(auto i : g[prev]){
                 int next = i[0];
                 int nextDist = i[1];
-                if(distance[prev] + nextDist < distance[next]){
-                    distance[next] = distance[prev] + nextDist;
-                    pq.push({distance[next],next});
+                if(d[prev] + nextDist < d[next]){
+                    d[next] = d[prev] + nextDist;
+                    pq.push({d[next],next});
                 }
             }
         }
-        return distance;
+        return d;
     }
 };
 
