@@ -22,7 +22,7 @@ public:
         }
         for(int i = 0;i<n;i++){
             string s = w[i];
-            for(int j = 0;j<(int)s.size();j++){
+            for(int j = 0;j<(int)s.length();j++){
                 string n = s.substr(0,j) + s.substr(j+1);
                 auto it = mp.find(n);
                 if(it == mp.end()){
