@@ -1,5 +1,4 @@
 class WordFilter {
-   private:
     unordered_map<string, int> hashMap;
 
    public:
