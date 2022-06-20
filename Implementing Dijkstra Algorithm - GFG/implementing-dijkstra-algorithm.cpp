@@ -10,24 +10,23 @@ class Solution
     //from the source vertex S.
     vector <int> dijkstra(int n, vector<vector<int>> g[], int s)
     {
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-        vector<int>d(n,INT_MAX);
-        d[s] = 0;
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        vector<int>dist(n,INT_MAX);
+        dist[s] = 0;
         pq.push({0,s});
         while(!pq.empty()){
-            int dist = pq.top().first;
-            int prev = pq.top().second;
+            int node = pq.top().second;
             pq.pop();
-            for(auto i : g[prev]){
-                int next = i[0];
-                int nextDist = i[1];
-                if(d[prev] + nextDist < d[next]){
-                    d[next] = d[prev] + nextDist;
-                    pq.push({d[next],next});
+            for(auto it : g[node]){
+                int nextNode = it[0];
+                int wt = it[1];
+                if(dist[node] + wt < dist[nextNode]){
+                    dist[nextNode] = dist[node] + wt;
+                    pq.push({dist[nextNode],nextNode});
                 }
             }
         }
-        return d;
+        return dist;
     }
 };
 
