@@ -27,12 +27,12 @@ public:
         }
         rank.resize(n,0);
         vector<bool>res;
-        for(auto r : req){
+        for(auto &r : req){
             int u = r[0],v = r[1];
             int paru = findPar(u),parv = findPar(v);
             bool flag = true;
             if(paru!=parv){
-                for(auto t : rest){
+                for(auto &t : rest){
                     int rtu = t[0],rtv = t[1];
                     int partu = findPar(rtu),partv = findPar(rtv);
                     if((paru == partu && parv == partv) || (paru == partv && parv == partu) ){
