@@ -1,25 +1,38 @@
 class Solution {
 public:
-    bool dfs(vector<vector<int>>&g,vector<int>&color,int i){
-        if(color[i] == -1) color[i] = 1;
-        for(auto &j : g[i]){
-            if(color[j] == -1){
-                color[j] = 1 - color[i];
-                if(!dfs(g,color,j)){
-                    return false;
-                }
-            }else if(color[i] == color[j]){
-                return false;
-            }
+    vector<int>par;
+    vector<int>rank;
+    int findPar(int p){
+        if(p == par[p]){
+            return p;
         }
-        return true;
+        return par[p] = findPar(par[p]);
+    }
+    void unionn(int u,int v){
+        u = findPar(u);
+        v = findPar(v);
+        
+        if(rank[u]>rank[v]){
+            par[v] = u;
+        }else if(rank[v]>rank[u]){
+            par[u] = v;
+        }else if(rank[u] == rank[v]){
+            par[v] = u;
+            rank[u]++;
+        }
     }
     bool isBipartite(vector<vector<int>>& g) {
         int n = g.size();
-        vector<int>color(n,-1);
+        par.resize(n,0);
+        rank.resize(n,0);
+        for(int i = 0;i<n;i++){
+            par[i] = i;
+        }
         for(int i = 0;i<n;++i){
-            if(color[i] == -1){
-                if(!dfs(g,color,i)){
+            for(int j = 0;j<g[i].size();++j){
+                if(findPar(i)!=findPar(g[i][j])){
+                    unionn(g[i][0],g[i][j]);
+                }else{
                     return false;
                 }
             }
