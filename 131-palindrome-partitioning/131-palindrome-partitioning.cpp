@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void solve(vector<vector<string>>&res,vector<string>&path,string s,int idx){
+    void solve(vector<vector<string>>&res,vector<string>&path,string &s,int idx){
         if(idx == s.size()){
             res.push_back(path);
             return;
@@ -13,13 +13,13 @@ public:
             }
         }
     }
-    bool isPossible(string s,int l,int h){
+    bool isPossible(string &s,int l,int h){
         while(l<=h){
             if(s[l++]!=s[h--]) return false;
         }
         return true;
     }
-    vector<vector<string>> partition(string s) {
+    vector<vector<string>> partition(string &s) {
         vector<vector<string>>res;
         vector<string>path;
         solve(res,path,s,0);
