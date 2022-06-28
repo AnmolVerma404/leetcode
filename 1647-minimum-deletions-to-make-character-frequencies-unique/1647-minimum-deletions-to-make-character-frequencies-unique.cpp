@@ -1,6 +1,9 @@
 class Solution {
 public:
     int minDeletions(string s) {
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
         unordered_map<char,int>mp;
         unordered_set<int>set;
         int c = 0;
