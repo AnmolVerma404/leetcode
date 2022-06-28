@@ -1,21 +1,45 @@
 class Solution {
 public:
     int minDeletions(string s) {
-        ios::sync_with_stdio(false);
-        cin.tie(nullptr);
-        cout.tie(nullptr);
-        unordered_map<char,int>mp;
-        unordered_set<int>set;
-        int c = 0;
-        for(auto &it : s) mp[it]++;
-        for(auto &it : mp){
-            while(set.find(it.second)!=set.end()){
-                it.second--;
-                c++;
-                if(it.second == 0) break;
-            }
-            if(it.second>0 && set.find(it.second) == set.end()) set.insert(it.second);
+        
+        int minDel = 0;
+        int freq[26] = {0};
+        
+        for(auto x : s) {
+            freq[x - 'a']++;
         }
-        return c;
+        
+        map<int, int> freqToCount;
+        
+        for(int i=0; i<26; i++) {
+            
+            if(freqToCount.find(freq[i]) == freqToCount.end()) 
+            {
+                if(freq[i] > 0)
+                    freqToCount[freq[i]] = 1;
+                else freqToCount[freq[i]] = 0;
+            }
+            else freqToCount[freq[i]]++;
+            
+        }
+        
+        for(auto it = freqToCount.rbegin(); it != freqToCount.rend(); it++) {
+            
+            auto count = it->second;
+            auto freq = it->first;
+            if(count > 1 and freq > 0) {
+                auto decre = count - 1;
+                freqToCount[freq - 1] += decre;
+                minDel += decre;
+            }
+        }
+        return minDel;
     }
 };
+
+static const int _ = [](){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return 0;
+}();
