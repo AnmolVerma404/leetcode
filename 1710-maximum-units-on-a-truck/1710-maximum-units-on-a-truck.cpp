@@ -1,18 +1,22 @@
 class Solution {
 public:
-    int maximumUnits(vector<vector<int>>& v, int t) {
+    int maximumUnits(vector<vector<int>>& b, int t) {
+        priority_queue<pair<int,int>>pq;
+        for(auto &it : b){
+            pq.push({it[1],it[0]});
+        }
         int res = 0;
-        sort(v.begin(),v.end(),[](vector<int>a,vector<int>b){
-            return a[1]>b[1];
-        });
-        for(auto i : v){
-            // cout<<i[0]<<" "<<i[1]<<"\n";
-            int x = min(i[0],t);
-            res+=x*i[1];
-            t-=x;
-            if(!t) break;
-            
-        }        
+        while(!pq.empty() && t!=0){
+            auto top = pq.top();
+            pq.pop();
+            if(t-top.second==0) return res + top.first*top.second;
+            else if(t-top.second<0){
+                res+=t*top.first;
+                return res;
+            }
+            t-=top.second;
+            res+=top.first*top.second;
+        }
         return res;
     }
 };
