@@ -1,17 +1,20 @@
 class Solution {
 public:
-    vector<vector<int>>dp;
-    int n,m;
-    int uniquePathsWithObstacles(vector<vector<int>>& o) {
-        n = o.size(),m = o[0].size();
-        dp.resize(n,vector<int>(m));
-        return solve(o,0,0);
+    int func(int m,int n,vector<vector<int>>& o,vector<vector<int>>& dp){
+        if(m == 0 && n == 0) return 1;
+        if(m<0 || n<0) return 0;
+        if(o[m][n] == 1) return 0;
+        if(dp[m][n]!=-1) return dp[m][n];
+        int left = func(m,n-1,o,dp);
+        int up = func(m-1,n,o,dp);
+        return dp[m][n] = left + up;
     }
-    int solve(vector<vector<int>> &v,int i ,int j){
-        if(i<0 || j<0 || i>=n || j >= m) return 0;
-        if(v[i][j]) return dp[i][j]=0;
-        if(i == n-1 && j == m-1 ) return 1;
-        if(dp[i][j]) return dp[i][j];
-        return dp[i][j] = solve(v,i+1,j) + solve(v,i,j+1);
+    int uniquePathsWithObstacles(vector<vector<int>>& o) {
+        int m = o.size();
+        int n = o[0].size();
+        if(o[0][0] == 1) return 0;
+        if(o[m-1][n-1] == 1) return 0;
+        vector<vector<int>>dp(m,vector<int>(n,-1));
+        return func(m-1,n-1,o,dp);
     }
 };
