@@ -1,15 +1,22 @@
 class Solution {
 public:
-    int func(int i,int j,int n,vector<vector<int>>&v,vector<vector<int>>&dp){
-        if(i == n) return 0;
-        if(dp[i][j]!=-1) return dp[i][j];
-        int left = v[i][j] + func(i+1,j,n,v,dp);
-        int right = v[i][j] + func(i+1,j+1,n,v,dp);
-        return dp[i][j] = min(left,right);
-    }
-    int minimumTotal(vector<vector<int>>& t) {
-        int n = t.size();
-        vector<vector<int>>dp(n,vector<int>(n,-1));
-        return func(0,0,n,t,dp);
+    int minimumTotal(vector<vector<int>>& v) {
+        int n = v.size();
+        vector<int> prev(n, 0), curr(n, 0);
+        for (int i = 0; i < n; ++i)
+        {
+            prev[i] = v[n - 1][i];
+        }
+        for (int i = n - 2; i >= 0; --i)
+        {
+            for (int j = i; j >= 0; --j)
+            {
+                int down = v[i][j] + prev[j];
+                int downRight = v[i][j] + prev[j + 1];
+                curr[j] = min(down, downRight);
+            }
+            prev = curr;
+        }
+        return prev[0];
     }
 };
