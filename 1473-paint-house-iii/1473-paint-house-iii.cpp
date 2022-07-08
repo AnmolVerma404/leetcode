@@ -1,0 +1,84 @@
+class Solution
+{
+public:
+    int n;
+    vector<int> houses;
+    vector<vector<int>> cost;
+    vector<vector<vector<int>>> dp;
+    int c;
+    int rec(int i, int last, int target)
+    {
+
+        if (target < 0)
+            return -1;
+
+        if (i == n && target != 0)
+        {
+            return -1;
+        }
+        if (i == n && target == 0)
+        {
+            return 0;
+        }
+
+        if (dp[i][last][target] != -2)
+        {
+            return dp[i][last][target];
+        }
+
+        int ans = INT_MAX;
+        bool possible = false;
+
+        if (houses[i] != 0)
+        {
+            if (houses[i] != last)
+            {
+                return dp[i][last][target] = rec(i + 1, houses[i], target - 1);
+            }
+            else
+            {
+                return dp[i][last][target] = rec(i + 1, houses[i], target);
+            }
+        }
+
+        for (int k = 0; k < c; k++)
+        {
+
+            int temp;
+            if (k + 1 != last)
+            {
+                temp = rec(i + 1, k + 1, target - 1);
+            }
+            else
+            {
+                temp = rec(i + 1, k + 1, target);
+            }
+
+            if (temp != -1)
+            {
+
+                possible = true;
+                ans = min(ans, cost[i][k] + temp);
+            }
+        }
+        if (possible)
+        {
+            return dp[i][last][target] = ans;
+        }
+        else
+        {
+            return dp[i][last][target] = -1;
+        }
+    }
+    int minCost(vector<int> &house, vector<vector<int>> &cst, int r, int col, int target)
+    {
+        cost = cst;
+        houses = house;
+        c = col;
+        n = r;
+
+        dp.resize(n + 1, vector<vector<int>>(n + 1, vector<int>(target + 1, -2)));
+
+        return rec(0, 0, target);
+    }
+};
