@@ -8,9 +8,14 @@ public:
         return dp[i] = min(one,two);
     }
     int minCostClimbingStairs(vector<int>& v) {
-        v.push_back(0);
         int n = v.size();
-        vector<int>dp(n,-1);
-        return func(n-1,n,v,dp);
+        int prev2 = v[0];
+        int prev1 = v[1];
+        for(int i = 2;i<n;++i){
+            int curr = min(prev2,prev1) + v[i];
+            prev2 = prev1;
+            prev1 = curr;
+        }
+        return min(prev1,prev2);
     }
 };
