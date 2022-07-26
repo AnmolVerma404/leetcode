@@ -1,20 +1,20 @@
 class Solution {
 public:
     int longestConsecutive(vector<int>& v) {
-        int mx = 0, cmx = 1,n = v.size();
-        if(n == 0) return 0;
+        int n = v.size();
+        if(!n) return 0;
         sort(v.begin(),v.end());
-        for(int i = 1;i<n;++i){
-            if(v[i] == v[i-1]){
-                continue;
-            }
-            else if(v[i]-1 == v[i-1]){
+        int mx = 0,cmx = 1;
+        // for(auto i : v) cout<<i<<" ";
+        for(int i = 0;i<n-1;++i){
+            if(v[i] + 1 == v[i+1]){
                 cmx++;
-            }else{
+            }else if(v[i]!=v[i+1] && cmx>1){
                 mx = max(mx,cmx);
                 cmx = 1;
             }
         }
-        return max(mx,cmx);
+        mx = max(mx,cmx);
+        return mx;
     }
 };
